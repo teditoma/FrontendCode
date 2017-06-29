@@ -5,8 +5,8 @@ hrApp.value('employeeActionsService', [
             url: "#/employeeslist"
         },
         {
-            label: "Add employee",
-            url: "#/employeeadd"
+            label: "User",
+            url: "#/user"
         }
     ]
 );
