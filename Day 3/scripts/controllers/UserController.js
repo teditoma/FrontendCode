@@ -7,7 +7,7 @@ hrApp.controller('UserController',['$scope', '$location', function($scope,$locat
 
     $scope.users=[];
 
-
+    $scope.showList=false;
 
     $scope.saveUser=function() {
         $scope.users.push(angular.copy($scope.user));
@@ -15,5 +15,14 @@ hrApp.controller('UserController',['$scope', '$location', function($scope,$locat
     }
     $scope.back=function(){
         $location.url('/');
+    }
+    $scope.reset=function() {
+        $scope.user.firstName = undefined;
+        $scope.user.lastName = undefined;
+        $scope.user.age = "";
+        $scope.user.phoneNumber = undefined;
+    }
+    $scope.toggleList=function(){
+        $scope.showList=!$scope.showList;
     }
 }]);
