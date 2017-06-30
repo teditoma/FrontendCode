@@ -1,28 +1,34 @@
-/**
- * Created by ginel.guiu on 6/29/2017.
- */
-
-hrApp.controller('UserController',['$scope', '$location', function($scope,$location){
-    $scope.user={};
-
-    $scope.users=[];
-
-    $scope.showList=false;
-
-    $scope.saveUser=function() {
-        $scope.users.push(angular.copy($scope.user));
-        alert('Userul a fost salvat');
-    }
-    $scope.back=function(){
+hrApp.controller('UserController', ['$scope', '$location', 'userService', function($scope, $location, userService){
+    "use strict";
+    $scope.back = function() {
         $location.url('/');
-    }
-    $scope.reset=function() {
-        $scope.user.firstName = undefined;
-        $scope.user.lastName = undefined;
-        $scope.user.age = "";
-        $scope.user.phoneNumber = undefined;
-    }
-    $scope.toggleList=function(){
-        $scope.showList=!$scope.showList;
-    }
+    };
+    $scope.reset = function() {
+        $scope.fname = "";
+        $scope.lname = "";
+        $scope.id = "";
+        $scope.age = "";
+    };
+
+    $scope.user = function(fname, lname, age, id) {
+        this.fname = fname;
+        this.lname = lname;
+        this.age = age;
+        this.id = id;
+    };
+
+    $scope.save = function() {
+        userService.push( new $scope.user($scope.fname, $scope.lname, $scope.age, $scope.id));
+        alert("Saved");
+        $scope.users = userService;
+    };
+    $scope.users = [];
+    $scope.showList = false;
+
+    $scope.show = function(){
+        if ( $scope.showList === true )
+            $scope.showList = false;
+        else
+            $scope.showList = true;
+    };
 }]);

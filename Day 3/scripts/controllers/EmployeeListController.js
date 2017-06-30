@@ -1,17 +1,20 @@
-hrApp.controller('EmployeeListController', ['$scope', '$http', '$location', 'commonResourcesFactory',
-    function ($scope, $http, $location,commonResourcesFactory) {
+hrApp.controller('EmployeeListController', ['$scope', '$http', '$location','commonResourcesFactory',
+    function ($scope, $http, $location,commonResourcesFactory ) {
 // TODO #HR2 - inject commonResourcesFactory
-
+        "use strict";
         $scope.employees = []; // Employee list
 
 
         //TODO #HR3 Load employee list from server using commonResourcesFactory
-        $http.get(commonResourcesFactory.findAllEmployeesUrl)
-            .success(function (data,status,headers,config) {
+        $scope.url = commonResourcesFactory.findAllEmployeesUrl;
+        $http.get($scope.url)
+            .success(function(data) {
                 $scope.employees = data;
-            }).error(function (data,status,headers,config) {
-                alert("Error" +status);
-        });
+            })
+            .error (function(status){
+                alert("Error: " + status);
+            });
+
 
 
         $scope.viewEmployee = function (employeeId) {
