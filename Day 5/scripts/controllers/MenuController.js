@@ -1,4 +1,4 @@
-hrApp.controller('MenuController', ['$scope', 'EmployeeActionsService', function ($scope, EmployeeActionsService) {
+hrApp.controller('MenuController', ['$scope', 'EmployeeActionsService', 'JobActionsServices', function ($scope, EmployeeActionsService, JobActionsServices) {
     /*
     $scope.employeeActionList = [{
         url:'#/employeeslist',
@@ -7,5 +7,6 @@ hrApp.controller('MenuController', ['$scope', 'EmployeeActionsService', function
     */
 
     $scope.employeeActionList = EmployeeActionsService;
+    $scope.jobActionList = JobActionsServices;
     $scope.currentDate = new Date();
 }]);

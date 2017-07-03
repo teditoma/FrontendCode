@@ -12,6 +12,10 @@ hrApp.config(['$routeProvider',
                 templateUrl: 'views/demo/math.html',
                 controller: 'MathController'
             })
+            .when('/employeeAdd', {
+                templateUrl: 'views/employeeAdd.html',
+                controller: 'EmployeeAddController'
+            })
             .when('/employeeList', {
                 templateUrl: 'views/employeeList.html',
                 controller: 'EmployeeListController'
@@ -23,6 +27,26 @@ hrApp.config(['$routeProvider',
             .when('/user', {
                 templateUrl: 'views/demo/user.html',
                 controller: 'UserController'
+            })
+            .when('/employeeEdit/:employeeId', {
+                templateUrl: 'views/employeeEdit.html',
+                controller: 'EmployeeEditController'
+            })
+            .when('/jobList',{
+                templateUrl: 'views/jobList.html',
+                controller: 'JobListController'
+            })
+            .when('/jobAdd',{
+                templateUrl: 'views/jobAdd.html',
+                controller: 'JobAddController'
+            })
+            .when('/jobView/:jobId',{
+                templateUrl: 'views/jobView.html',
+                controller: 'JobViewController'
+            })
+            .when('/jobEdit/:jobId',{
+                templateUrl: 'views/jobEdit.html',
+                controller: 'JobEditController'
             })
             .otherwise({
                 templateUrl: 'views/main.html',

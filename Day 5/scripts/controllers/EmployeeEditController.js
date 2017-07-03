@@ -1,11 +1,38 @@
-hrApp.controller('EmployeeEditController', ['$scope', '$http', '$routeParams', '$location', 'commonResourcesFactory',
-    function ($scope, $http, $routeParams, $location, commonResourcesFactory) {
+hrApp.controller('EmployeeEditController', ['$scope', '$http', '$routeParams', '$location', 'CommonResourcesFactory', 'ManagerService',
+    function ($scope, $http, $routeParams, $location, commonResourcesFactory, managerService) {
         $scope.requiredErrorMessage = "Please fill out this form!";
         $scope.patternDateNotRespectedMessage = "The date format should be yyyy-mm-dd";
         $scope.patternCommisionNotRespectedMessage = "Commission should be in the format 0.XX";
 
         //TODO #HR5
+        $scope.departments = [];
+        $scope.managers = [];
+        $scope.jobs = [];
+        $scope.employee = [];
 
+        $http.get(commonResourcesFactory.findAllDepartmentsUrl)
+            .success(function (data) {
+                $scope.departments = data;
+
+            });
+        $http.get(commonResourcesFactory.findAllJobsUrl)
+            .success(function (data) {
+                $scope.jobs = data;
+            });
+
+
+        managerService.findManagers()
+            .then(function (res) {
+                $scope.managers = res.data;
+
+            }, function (err) {
+                console.log("Error at employees/findOne: " + err);
+            })
+
+        $http.get(commonResourcesFactory.findOneEmployeeUrl + $routeParams.employeeId)
+            .success(function (data) {
+                $scope.employee = data;
+            });
         /**
          * Reset form
          */
